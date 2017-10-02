@@ -1,0 +1,115 @@
+/* Stub CSS file for your tinychat app! */
+
+/* =================================
+Top level, app container
+================================= */
+
+body {
+  background-color: snow;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 720px;
+}
+
+.container > h1,
+.container > p {
+  text-align: center;
+}
+
+/* =================================
+Chat container
+================================= */
+
+.chat {
+  background-image: radial-gradient(#bbb, #fff), radial-gradient(#bbb, #fff);
+  background-position: 0 40%, 100% 40%;
+  background-repeat: no-repeat;
+  background-size: 3px 80%;
+  font: 300 16px "Lato", "Open Sans", "Helvetica Neue", sans-serif;
+  height: 75vh;
+  margin-bottom: 2vh;
+  overflow: scroll;
+  padding: 0 5px;
+  width: 100%;
+}
+
+/* =================================
+Chat form
+================================= */
+
+.chat-form {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.chat-form > input {
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  width: 80%;
+}
+
+.chat-form > button {
+  padding: 0 10px;
+}
+
+.user-icon {
+  font-size: 2rem;
+}
+
+.user-icon:hover {
+  cursor: pointer;
+}
+
+/* =================================
+Messages
+================================= */
+
+.message {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.messageDiv {
+  font-weight: 400;
+}
+
+.authorTimeDiv {
+  margin-left: auto;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+/* =================================
+Medium devices
+================================= */
+
+@media all and (max-width: 800px) {
+  .container {
+    width: 90vw;
+  }
+}
+
+/* =================================
+Small devices
+================================= */
+
+@media all and (max-width: 500px) {
+  .container {
+    width: 100vw;
+  }
+  .chat-form {
+    width: 90vw;
+  }
+  .chat-form > input {
+    width: 70%;
+  }
+}
