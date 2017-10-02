@@ -16,6 +16,10 @@ $(document).ready(function() {
         .addClass("authorTimeDiv")
         .text(postInfo);
 
+      messageDiv.linkify({
+        target: "_blank"
+      });
+
       $("<div/>")
         .addClass("message")
         .append(messageDiv)
@@ -56,11 +60,7 @@ $(document).ready(function() {
   })
     .done(function() {
       console.log("Successfully initialized chat");
-
       $(".chat").animate({ scrollTop: $(".chat")[0].scrollHeight }, 1000);
-      $(".messageDiv").linkify({
-        target: "_blank"
-      });
     })
     .fail(function(err) {
       console.error(`Error retrieving messages! ${err}`);
