@@ -2,6 +2,27 @@ $(document).ready(function() {
   // =================================
   // Helper functions
   // =================================
+  function submitMessage(e) {
+    e.preventDefault();
+    let content = $(".chat-form input").val();
+    let timestamp = Date.now();
+    let momentTime = moment(timestamp).format("MMM D");
+    let messageObj = {
+      author: username,
+      content,
+      timestamp
+    };
+
+    // Send messageObj to backend
+    // If successful, post message to frontend
+    addMessage(content, username, momentTime, false, true);
+    sendMessage(content, username, momentTime);
+    $(".chat").animate({ scrollTop: $(".chat")[0].scrollHeight }, 1000);
+    // Else, inform user that there is an error
+
+    $(".chat-form input").val("");
+  }
+
   function addMessage(message, author, time, edited, isUser) {
     if (message) {
       let postInfo = `${author} | ${time}`;
@@ -35,16 +56,16 @@ $(document).ready(function() {
     }
   }
 
+  function sendMessage(...args) {
+    socket.emit("user message", args);
+  }
+
   function setUsername() {
     let newName = prompt("Please enter your name");
     if (username && newName === null) {
       return;
     }
     !newName ? setUsername() : (username = newName);
-  }
-
-  function sendMessage(...args) {
-    socket.emit("user message", args);
   }
 
   function alertUser(msg) {
@@ -92,26 +113,7 @@ $(document).ready(function() {
   // Event handlers
   // =================================
 
-  $(".chat-form").on("submit", e => {
-    e.preventDefault();
-    let content = $(".chat-form input").val();
-    let timestamp = Date.now();
-    let momentTime = moment(timestamp).format("MMM D");
-    let messageObj = {
-      author: username,
-      content,
-      timestamp
-    };
-
-    // Send messageObj to backend
-    // If successful, post message to frontend
-    addMessage(content, username, momentTime, false, true);
-    sendMessage(content, username, momentTime);
-    $(".chat").animate({ scrollTop: $(".chat")[0].scrollHeight }, 1000);
-    // Else, inform user that there is an error
-
-    $(".chat-form input").val("");
-  });
+  $(".chat-form").on("submit", submitMessage);
 
   $(".user-icon").on("click", setUsername);
 
