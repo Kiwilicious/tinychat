@@ -36,9 +36,21 @@ $(document).ready(function() {
     !newName ? setUsername() : (username = newName);
   }
 
+  function sendMessage(...args) {
+    socket.emit("user message", args);
+  }
+
+  function alertUser(msg) {
+    $(".user-alert")
+      .text(msg)
+      .fadeIn(2000)
+      .fadeOut(1000);
+  }
+
   // =================================
   // Initialization
   // =================================
+  const socket = io();
   let username;
   setUsername();
 
@@ -87,6 +99,7 @@ $(document).ready(function() {
     // Send messageObj to backend
     // If successful, post message to frontend
     addMessage(content, username, momentTime);
+    sendMessage(content, username, momentTime);
     $(".chat").animate({ scrollTop: $(".chat")[0].scrollHeight }, 1000);
     // Else, inform user that there is an error
 
@@ -94,4 +107,13 @@ $(document).ready(function() {
   });
 
   $(".user-icon").on("click", setUsername);
+
+  socket.on("user connect", alertUser);
+
+  socket.on("user disconnect", alertUser);
+
+  socket.on("chat message", msg => {
+    addMessage(...msg);
+    $(".chat").animate({ scrollTop: $(".chat")[0].scrollHeight }, 1000);
+  });
 });
