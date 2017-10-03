@@ -2,19 +2,26 @@ $(document).ready(function() {
   // =================================
   // Helper functions
   // =================================
-  function addMessage(message, author, time, edited) {
+  function addMessage(message, author, time, edited, isUser) {
     if (message) {
       let postInfo = `${author} | ${time}`;
       if (edited) {
         edited = moment(+edited).format("MMM D");
         postInfo += ` | Last edited: ${edited}`;
       }
+
       let messageDiv = $("<div/>")
         .addClass("messageDiv")
         .text(message);
       let authorTimeDiv = $("<div/>")
         .addClass("authorTimeDiv")
         .text(postInfo);
+
+      if (isUser) {
+        $("<span/>")
+          .addClass("glyphicon glyphicon-edit edit-msg")
+          .appendTo(authorTimeDiv);
+      }
 
       messageDiv.linkify({
         target: "_blank"
@@ -98,7 +105,7 @@ $(document).ready(function() {
 
     // Send messageObj to backend
     // If successful, post message to frontend
-    addMessage(content, username, momentTime);
+    addMessage(content, username, momentTime, false, true);
     sendMessage(content, username, momentTime);
     $(".chat").animate({ scrollTop: $(".chat")[0].scrollHeight }, 1000);
     // Else, inform user that there is an error
