@@ -33,9 +33,11 @@ Chat container
   font: 300 16px "Lato", "Open Sans", "Helvetica Neue", sans-serif;
   height: 75vh;
   margin-bottom: 2vh;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   padding: 0 5px;
   width: 100%;
+  word-wrap: break-word;
 }
 
 .user-alert {
