@@ -6,19 +6,45 @@ Top level, app container
 
 body {
   background-color: snow;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    from(rgba(25, 184, 25, 0.3)),
+    to(rgba(36, 122, 208, 0.1))
+  );
+  background-image: -webkit-linear-gradient(
+    135deg,
+    rgba(25, 184, 25, 0.3),
+    rgba(36, 122, 208, 0.1)
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(25, 184, 25, 0.3),
+    rgba(36, 122, 208, 0.1)
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(25, 184, 25, 0.3),
+    rgba(36, 122, 208, 0.1)
+  );
   color: #333;
 }
 
 .container {
+  background-color: rgba(255, 250, 250, 0.7);
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 800px;
 }
 
-.container > h1,
-.container > p {
+.chat-title {
+  background-color: rgba(104, 80, 80, 0.2);
+  border-radius: 5px;
+  margin: 1vh auto 1vh;
   text-align: center;
+  width: 50%;
 }
 
 /* =================================
@@ -67,10 +93,6 @@ Chat form
   border: 3px solid #ccc;
   border-radius: 5px;
   width: 80%;
-}
-
-.chat-form > button {
-  padding: 0 10px;
 }
 
 .user-icon {
@@ -123,6 +145,9 @@ Small devices
 @media all and (max-width: 500px) {
   .container {
     width: 100vw;
+  }
+  .chat-title {
+    width: 100%;
   }
   .chat-form {
     width: 90vw;
