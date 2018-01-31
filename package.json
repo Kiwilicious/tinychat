@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "py -m http.server 8080"
+    "start": "nodemon server"
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +14,8 @@
     "express": "^4.16.1",
     "path": "^0.12.7",
     "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
   }
 }
